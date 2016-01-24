@@ -8,9 +8,11 @@ const store = configureStore();
 
 class Root extends React.Component {
   render() {
-    <Provider store={store}>
-      <App />
-    </Provider>
+    return (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    )
   }
 }
 
