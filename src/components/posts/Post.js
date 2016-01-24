@@ -27,18 +27,18 @@ class Post extends React.Component {
 
     return (
       <TouchableComponent {...buttonProps}>
-        <View>
-          <Text>Hi</Text>
-        <View>
+        <View style={styles.container}>
+          <Text>{this.props.title}</Text>
+          <Text>{this.props.author}</Text>
+        </View>
       </TouchableComponent>
     )
   }
 }
 
 var styles = StyleSheet.create({
-  channel: {
-    margin: 8,
-    color: '#f00'
+  container: {
+    padding: 8
   }
 });
 

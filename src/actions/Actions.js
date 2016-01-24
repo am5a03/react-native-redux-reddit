@@ -37,8 +37,8 @@ function fetchPosts(subreddit, after) {
     dispatch(requestPosts(subreddit));
     return fetch(getSubRedditUrl(subreddit, after))
       .then(response => response.json())
-      .then(json => dispatch(receivePosts(subreddit, json)))
-      .catch(error => console.log(error));
+      .then(json => dispatch(receivePosts(subreddit, json)));
+      //.catch(error => console.log(error));
   }
 }
 

@@ -1,6 +1,8 @@
 import React from 'react-native';
-import SubRedditList from '../components/subreddits/SubRedditList';
+import SubRedditList from './subreddits/SubRedditList';
+import PostList from './posts/PostList';
 import {selectedSubReddit, fetchPostsIfNeeded, refreshSubReddit} from '../actions/Actions';
+
 let {
   StyleSheet,
   View,
@@ -19,16 +21,16 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch, selectedSubReddit, after } = this.props;
-    dispatch(fetchPostsIfNeeded(selectedSubReddit, this.props.after));
+    // const { dispatch, selectedSubReddit, after } = this.props;
+    // dispatch(fetchPostsIfNeeded(selectedSubReddit, this.props.after));
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    if (nextProps.selectedSubReddit !== this.props.selectedSubReddit) {
-      const { dispatch, selectedSubReddit, after } = this.props;
-      dispatch(fetchPostsIfNeeded(selectedSubReddit, after));
-    }
+    // console.log(nextProps);
+    // if (nextProps.selectedSubReddit !== this.props.selectedSubReddit) {
+    //   const { dispatch, selectedSubReddit, after } = this.props;
+    //   dispatch(fetchPostsIfNeeded(selectedSubReddit, after));
+    // }
   }
 
   _renderSubreddits() {
@@ -66,9 +68,7 @@ class Main extends React.Component {
         <ToolbarAndroid
           style={styles.toolbar}
           title="RedditReactReduxNative"/>
-          <View>
-            <Text>Hi</Text>
-          </View>
+          <PostList {...this.props}/>
       </DrawerLayoutAndroid>
     )
   }

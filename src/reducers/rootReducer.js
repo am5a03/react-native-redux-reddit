@@ -29,9 +29,11 @@ function posts(state = {
         didRefresh: false,
       });
     case ActionTypes.RECEIVE_POSTS:
+      console.log(state.items);
       return Object.assign({}, state, {
         didRefresh: true,
-        items: action.posts,
+        isFetching: false,
+        items: state.items.concat(action.posts),
         after: action.after
       });
     default:

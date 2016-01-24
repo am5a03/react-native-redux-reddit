@@ -1,4 +1,6 @@
 import React from 'react-native';
+import Post from './Post';
+import {selectedSubReddit, fetchPostsIfNeeded, refreshSubReddit} from '../../actions/Actions';
 
 let {
   ListView,
@@ -19,15 +21,31 @@ class PostList extends React.Component {
       }),
       isFetching: true,
       after: "",
+      count: 0
     }
   }
 
   componentDidMount() {
+    const { dispatch, selectedSubReddit, after } = this.props;
+    dispatch(fetchPostsIfNeeded(selectedSubReddit, this.props.after));
+  }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    const { dispatch, selectedSubReddit, after } = this.props;
+    this.setState({
+      isFetching: nextProps.isFetching,
+      dataSource: this.state.dataSource.cloneWithRows(nextProps.posts),
+      count: nextProps.posts.length
+    })
+    if (nextProps.selectedSubReddit !== this.props.selectedSubReddit) {
+      dispatch(fetchPostsIfNeeded(selectedSubReddit, after));
+    }
   }
 
   onEndReached() {
-
+    const { dispatch, selectedSubReddit, after } = this.props;
+    dispatch(fetchPostsIfNeeded(selectedSubReddit, after));
   }
 
   renderFooter() {
@@ -57,7 +75,7 @@ class PostList extends React.Component {
 
     return(
       <View>
-        <LoadingView styleAttr='Small'/>
+        <LoadingView/>
       </View>
     )
   }
@@ -79,18 +97,18 @@ class PostList extends React.Component {
   }
 
   render() {
-    if (this.state.isFetching) {
+    if (this.state.isFetching && this.state.count === 0) {
       return this.renderLoadingView();
+    } else {
+      return(
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderPosts}
+          renderFooter={this.renderFooter}
+          onEndReached={this.onEndReached.bind(this)}
+        />
+      )
     }
-
-    return(
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this._renderPosts}
-        renderFooter={this.renderFooter}
-        onEndReached={this.onEndReached}
-      />
-    )
   }
 
 }
