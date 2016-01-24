@@ -17,10 +17,21 @@ class MainContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  //TODO
-  let subbreddit = '';
+  const { selectedSubReddit, postsBySubReddit } = state;
+  const {
+    isFetching,
+    items: posts,
+    after
+  } = postsBySubReddit[selectedSubReddit] || {
+    isFetching: true,
+    items: [],
+    after: ""
+  }
   return {
-    subbreddit
+    selectedSubReddit,
+    posts,
+    isFetching,
+    after
   }
 }
 

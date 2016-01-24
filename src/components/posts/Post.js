@@ -1,5 +1,4 @@
 import React from 'react-native';
-
 let {
   View,
   Text,
@@ -16,6 +15,7 @@ class Post extends React.Component {
   render() {
     let TouchableComponent;
     let buttonProps = {};
+
     if (Platform.OS === 'ios') {
 
     } else {
@@ -24,13 +24,14 @@ class Post extends React.Component {
         background: TouchableNativeFeedback.Ripple('#f00', false)
       }
     }
-    return(
+
+    return (
       <TouchableComponent {...buttonProps}>
-      <View>
-        <Text style={styles.channel}>{this.props.name}</Text>
-      </View>
+        <View>
+          <Text>Hi</Text>
+        <View>
       </TouchableComponent>
-    );
+    )
   }
 }
 
@@ -41,4 +42,4 @@ var styles = StyleSheet.create({
   }
 });
 
-export Post;
+export default Post;

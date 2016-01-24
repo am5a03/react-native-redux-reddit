@@ -1,5 +1,6 @@
 import React from 'react-native';
 import SubRedditList from '../components/subreddits/SubRedditList';
+import {selectedSubReddit, fetchPostsIfNeeded, refreshSubReddit} from '../actions/Actions';
 let {
   StyleSheet,
   View,
@@ -7,13 +8,27 @@ let {
   Text,
   Image,
   ToolbarAndroid,
-  Platform
+  Platform,
+  PropTypes
 } = React;
 import {connect} from 'react-redux';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    const { dispatch, selectedSubReddit, after } = this.props;
+    dispatch(fetchPostsIfNeeded(selectedSubReddit, this.props.after));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    if (nextProps.selectedSubReddit !== this.props.selectedSubReddit) {
+      const { dispatch, selectedSubReddit, after } = this.props;
+      dispatch(fetchPostsIfNeeded(selectedSubReddit, after));
+    }
   }
 
   _renderSubreddits() {
@@ -57,6 +72,11 @@ class Main extends React.Component {
       </DrawerLayoutAndroid>
     )
   }
+}
+
+Main.propTypes = {
+  selectedSubReddit: PropTypes.string.isRequired,
+  posts: PropTypes.array.isRequired
 }
 
 export default Main;
