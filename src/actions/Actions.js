@@ -1,7 +1,7 @@
 import * as ActionTypes from './ActionTypes';
 import {getSubRedditUrl} from '../utils/ApiUtils';
 
-export function selectedSubReddit(subreddit) {
+export function selectSubReddit(subreddit) {
   return {
     type: ActionTypes.SELECT_SUBREDDIT,
     subreddit: subreddit
@@ -34,7 +34,7 @@ function receivePosts(subreddit, json) {
 
 function fetchPosts(subreddit, after) {
   return dispatch => {
-    dispatch(requestPosts(subreddit));
+    dispatch(requestPosts(subreddit, after));
     return fetch(getSubRedditUrl(subreddit, after))
       .then(response => response.json())
       .then(json => dispatch(receivePosts(subreddit, json)));

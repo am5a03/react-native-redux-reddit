@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import SubReddit from './SubReddit';
 import {getSubReddits} from '../subreddits';
+import {selectSubReddit, fetchPostsIfNeeded, refreshSubReddit} from '../../actions/Actions';
 
 let {
   ListView,
@@ -27,14 +28,28 @@ class SubRedditList extends React.Component {
     let subreddits = getSubReddits();
     this.setState({
       dataSource: ds.cloneWithRows(subreddits)
-    })
+    });
+    //console.log(this.props);
+  }
+
+
+  _pressSubReddit(name) {
+    this.props.dispatch(selectSubReddit(name));
+  }
+
+  _renderRow(subreddit, sectionId, rowId) {
+    return(
+      <SubReddit
+        onPress={this._pressSubReddit.bind(this, subreddit.name)}
+        name={subreddit.name}/>
+    )
   }
 
   render() {
     return(
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={(subreddit) => <SubReddit name={subreddit.name}/>}
+        renderRow={this._renderRow.bind(this)}
       />
     )
   }

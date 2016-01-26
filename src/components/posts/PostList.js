@@ -1,6 +1,6 @@
 import React from 'react-native';
 import Post from './Post';
-import {selectedSubReddit, fetchPostsIfNeeded, refreshSubReddit} from '../../actions/Actions';
+import {selectSubReddit, fetchPostsIfNeeded, refreshSubReddit} from '../../actions/Actions';
 
 let {
   ListView,
@@ -21,25 +21,26 @@ class PostList extends React.Component {
       }),
       isFetching: true,
       after: "",
-      count: 0
+      count: 0,
+      subreddit: ""
     }
   }
 
   componentDidMount() {
     const { dispatch, selectedSubReddit, after } = this.props;
-    dispatch(fetchPostsIfNeeded(selectedSubReddit, this.props.after));
+    dispatch(fetchPostsIfNeeded(selectedSubReddit, after));
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     const { dispatch, selectedSubReddit, after } = this.props;
     this.setState({
       isFetching: nextProps.isFetching,
       dataSource: this.state.dataSource.cloneWithRows(nextProps.posts),
-      count: nextProps.posts.length
+      count: nextProps.posts.length,
+      subreddit: nextProps.selectedSubReddit
     })
     if (nextProps.selectedSubReddit !== this.props.selectedSubReddit) {
-      dispatch(fetchPostsIfNeeded(selectedSubReddit, after));
+      dispatch(fetchPostsIfNeeded(nextProps.selectedSubReddit, nextProps.after));
     }
   }
 

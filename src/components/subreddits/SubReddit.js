@@ -13,6 +13,10 @@ class SubReddit extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    //console.log(this.props);
+  }
+
   render() {
     let TouchableComponent;
     let buttonProps = {};
@@ -25,7 +29,7 @@ class SubReddit extends React.Component {
       }
     }
     return(
-      <TouchableComponent {...buttonProps}>
+      <TouchableComponent {...buttonProps} onPress={this.props.onPress}>
         <View>
           <Text style={styles.item}>{this.props.name}</Text>
         </View>
