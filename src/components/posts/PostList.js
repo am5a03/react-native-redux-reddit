@@ -8,7 +8,8 @@ let {
   Text,
   ProgressBarAndroid,
   ProgressViewIOS,
-  Platform
+  Platform,
+  RecyclerViewBackedScrollView
 } = React;
 
 class PostList extends React.Component {
@@ -107,6 +108,7 @@ class PostList extends React.Component {
           renderRow={this._renderPosts}
           renderFooter={this.renderFooter}
           onEndReached={this.onEndReached.bind(this)}
+          renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         />
       )
     }
