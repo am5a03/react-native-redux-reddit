@@ -4,7 +4,8 @@ let {
   Text,
   StyleSheet,
   Platform,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  Image
 } = React;
 
 class Post extends React.Component {
@@ -28,8 +29,11 @@ class Post extends React.Component {
     return (
       <TouchableComponent {...buttonProps}>
         <View style={styles.container}>
-          <Text>{this.props.title}</Text>
-          <Text>{this.props.author}</Text>
+          <Text style={styles.ups}>{this.props.ups}</Text>
+          <View style={styles.middleContainer}>
+            <Text style={styles.title}>{this.props.title}</Text>
+            <Text>{this.props.author}</Text>
+          </View>
         </View>
       </TouchableComponent>
     )
@@ -38,7 +42,26 @@ class Post extends React.Component {
 
 var styles = StyleSheet.create({
   container: {
+    flex: 1,
+    flexDirection: 'row',
     padding: 8
+  },
+  middleContainer: {
+    flex: 1
+  },
+  ups: {
+    flex: 0.3,
+    fontSize: 15
+  },
+  title: {
+    fontWeight: 'bold'
+  },
+  rightContainer: {
+    flex: 0.3
+  },
+  thumbnail: {
+    width: 70,
+    height: 70
   }
 });
 

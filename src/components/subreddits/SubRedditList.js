@@ -10,7 +10,8 @@ import {selectSubReddit, fetchPostsIfNeeded, refreshSubReddit} from '../../actio
 let {
   ListView,
   Text,
-  View
+  View,
+  ToastAndroid
 } = React;
 
 class SubRedditList extends React.Component {
@@ -34,6 +35,7 @@ class SubRedditList extends React.Component {
 
 
   _pressSubReddit(name) {
+    ToastAndroid.show('Selected=' + name, ToastAndroid.LONG);
     this.props.dispatch(selectSubReddit(name));
   }
 

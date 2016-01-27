@@ -9,7 +9,8 @@ let {
   ProgressBarAndroid,
   ProgressViewIOS,
   Platform,
-  RecyclerViewBackedScrollView
+  RecyclerViewBackedScrollView,
+  StyleSheet
 } = React;
 
 class PostList extends React.Component {
@@ -107,13 +108,17 @@ class PostList extends React.Component {
           dataSource={this.state.dataSource}
           renderRow={this._renderPosts}
           renderFooter={this.renderFooter}
+          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
           onEndReached={this.onEndReached.bind(this)}
           renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         />
       )
     }
   }
-
 }
+
+let styles = StyleSheet.create({
+  separator: { height: 1, backgroundColor: '#CCCCCC', },
+});
 
 export default PostList;
