@@ -29,7 +29,7 @@ function posts(state = {
         didRefresh: false,
       });
     case ActionTypes.RECEIVE_POSTS:
-      console.log(state.items);
+      //console.log(state.items);
       return Object.assign({}, state, {
         didRefresh: true,
         isFetching: false,
