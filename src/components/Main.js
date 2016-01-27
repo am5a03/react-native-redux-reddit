@@ -1,7 +1,7 @@
 import React from 'react-native';
 import SubRedditList from './subreddits/SubRedditList';
 import PostList from './posts/PostList';
-import {selectedSubReddit, fetchPostsIfNeeded, refreshSubReddit} from '../actions/Actions';
+import {selectSubReddit, fetchPostsIfNeeded, refreshSubReddit} from '../actions/Actions';
 
 let {
   StyleSheet,
@@ -43,7 +43,7 @@ class Main extends React.Component {
             source={{uri: 'https://s3.amazonaws.com/pomodoro-exp/patch.jpg'}} />
           <View style={styles.menuHeaderOverlay} />
         </View>
-        <SubRedditList/>
+        <SubRedditList {...this.props}/>
       </View>
     );
   }
@@ -61,7 +61,7 @@ class Main extends React.Component {
       <DrawerLayoutAndroid
         style={styles.container}
         drawerWidth={300}
-        renderNavigationView={this._renderSubreddits}
+        renderNavigationView={this._renderSubreddits.bind(this)}
         ref={(drawer) => {this.drawer = drawer}}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
       >
@@ -76,7 +76,9 @@ class Main extends React.Component {
 
 Main.propTypes = {
   selectedSubReddit: PropTypes.string.isRequired,
-  posts: PropTypes.array.isRequired
+  posts: PropTypes.array.isRequired,
+  after: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
 export default Main;
