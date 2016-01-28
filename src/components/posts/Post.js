@@ -1,4 +1,5 @@
 import React from 'react-native';
+import {isValidThumbnail} from '../../utils/UrlUtils';
 let {
   View,
   Text,
@@ -26,6 +27,19 @@ class Post extends React.Component {
       }
     }
 
+    let isValid = isValidThumbnail(this.props.thumbnail)
+    let v;
+    if (isValid) {
+      v = <Image
+            source={{uri: this.props.thumbnail}}
+            style={styles.thumbnail}
+          />
+    } else {
+      v = <View>
+            <Text>{this.props.thumbnail}</Text>
+          </View>
+    }
+
     return (
       <TouchableComponent {...buttonProps}>
         <View style={styles.container}>
@@ -33,6 +47,9 @@ class Post extends React.Component {
           <View style={styles.middleContainer}>
             <Text style={styles.title}>{this.props.title}</Text>
             <Text>{this.props.author}</Text>
+          </View>
+          <View style={styles.rightContainer}>
+            {v}
           </View>
         </View>
       </TouchableComponent>
@@ -43,25 +60,26 @@ class Post extends React.Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    padding: 8
+    flexDirection: 'row'
   },
   middleContainer: {
     flex: 1
   },
   ups: {
     flex: 0.3,
-    fontSize: 15
+    fontSize: 16,
+    marginLeft: 8
   },
   title: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: 14
   },
   rightContainer: {
     flex: 0.3
   },
   thumbnail: {
-    width: 70,
-    height: 70
+    width: 80,
+    height: 80
   }
 });
 

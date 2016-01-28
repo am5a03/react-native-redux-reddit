@@ -8,7 +8,8 @@ let {
   Text,
   ProgressBarAndroid,
   ProgressViewIOS,
-  Platform
+  Platform,
+  StyleSheet
 } = React;
 
 class PostList extends React.Component {
@@ -106,6 +107,7 @@ class PostList extends React.Component {
           renderRow={this._renderPosts}
           renderFooter={this.renderFooter}
           onEndReached={this.onEndReached.bind(this)}
+          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
         />
       )
     }
@@ -114,3 +116,9 @@ class PostList extends React.Component {
 }
 
 export default PostList;
+
+var styles = StyleSheet.create({
+  separator: {
+    height: 1, backgroundColor: '#CCCCCC',
+  }
+});
