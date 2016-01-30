@@ -1,5 +1,6 @@
 import React from 'react-native';
 import Post from './Post';
+import {Actions} from 'react-native-router-flux';
 import {selectSubReddit, fetchPostsIfNeeded, refreshSubReddit} from '../../actions/Actions';
 
 let {
@@ -87,9 +88,14 @@ class PostList extends React.Component {
     )
   }
 
+  _pressPost(post) {
+    Actions.postDetail({data: post});
+  }
+
   _renderPosts(post) {
     return(
       <Post
+        onPress={this._pressPost.bind(this, post)}
         title={post.title}
         ups={post.ups}
         thumbnail={post.thumbnail}
@@ -104,7 +110,7 @@ class PostList extends React.Component {
       return(
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={this._renderPosts}
+          renderRow={this._renderPosts.bind(this)}
           renderFooter={this.renderFooter}
           onEndReached={this.onEndReached.bind(this)}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}

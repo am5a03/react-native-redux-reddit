@@ -1,4 +1,5 @@
 import React from 'react-native';
+import {Actions} from 'react-native-router-flux';
 import {isValidThumbnail} from '../../utils/UrlUtils';
 let {
   View,
@@ -23,7 +24,7 @@ class Post extends React.Component {
     } else {
       TouchableComponent = TouchableNativeFeedback;
       buttonProps = {
-        background: TouchableNativeFeedback.Ripple('#f00', false)
+        background: TouchableNativeFeedback.Ripple('#ddd', false)
       }
     }
 
@@ -41,7 +42,7 @@ class Post extends React.Component {
     }
 
     return (
-      <TouchableComponent {...buttonProps}>
+      <TouchableComponent {...buttonProps} onPress={this.props.onPress}>
         <View style={styles.container}>
           <Text style={styles.ups}>{this.props.ups}</Text>
           <View style={styles.middleContainer}>

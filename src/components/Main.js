@@ -66,6 +66,7 @@ class Main extends React.Component {
         drawerPosition={DrawerLayoutAndroid.positions.Left}
       >
         <ToolbarAndroid
+          titleColor="#fff"
           style={styles.toolbar}
           title="RedditReactReduxNative"/>
           <PostList {...this.props}/>
@@ -113,7 +114,7 @@ var styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.4)',
   },
   toolbar: {
-    backgroundColor: '#e9eaed',
+    backgroundColor: '#222',
     height: 56,
     marginTop: 24,
   },
