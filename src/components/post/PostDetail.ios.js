@@ -4,7 +4,8 @@ import PostDetailBase from './PostDetailBase';
 let {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  NativeModules
 } = React;
 
 class PostDetail extends PostDetailBase {
@@ -16,6 +17,12 @@ class PostDetail extends PostDetailBase {
   }
 
   componentDidMount() {
+    NativeModules.SimpleCacheModule.getString("lastVisit", (val) => {
+      this.setState({
+        lastVisit: val
+      });
+    })
+    NativeModules.SimpleCacheModule.putString("lastVisit", this.props.data.title);
   }
 
   componentWillReceiveProps(nextProps) {
