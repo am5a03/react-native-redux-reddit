@@ -51,8 +51,8 @@ class Main extends React.Component {
   render() {
     if (Platform.OS === 'ios') {
       return (
-        <View>
-          <Text>Sorry, not implemented</Text>
+        <View style={{ flex: 1 }}>
+          <PostList {...this.props}/>
         </View>
       )
     }

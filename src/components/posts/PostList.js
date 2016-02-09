@@ -8,9 +8,10 @@ let {
   View,
   Text,
   ProgressBarAndroid,
-  ProgressViewIOS,
+  ActivityIndicatorIOS,
   Platform,
-  StyleSheet
+  StyleSheet,
+  Dimensions
 } = React;
 
 class PostList extends React.Component {
@@ -54,14 +55,14 @@ class PostList extends React.Component {
     let LoadingView;
 
     if (Platform.OS === 'ios') {
-      LoadingView = ProgressViewIOS;
+      LoadingView = ActivityIndicatorIOS;
     } else {
       LoadingView = ProgressBarAndroid;
     }
 
     return(
       <View>
-        <ProgressBarAndroid styleAttr='Small'/>
+        <LoadingView styleAttr='Small'/>
       </View>
     )
   }
@@ -70,7 +71,7 @@ class PostList extends React.Component {
     let LoadingView;
 
     if (Platform.OS === 'ios') {
-      LoadingView = ProgressViewIOS;
+      LoadingView = ActivityIndicatorIOS;
     } else {
       LoadingView = ProgressBarAndroid;
     }
@@ -107,8 +108,10 @@ class PostList extends React.Component {
     if (this.state.isFetching && this.state.count === 0) {
       return this.renderLoadingView();
     } else {
+      const windowDims = Dimensions.get('window');
       return(
         <ListView
+          style={{height: windowDims.height}}
           dataSource={this.state.dataSource}
           renderRow={this._renderPosts.bind(this)}
           renderFooter={this.renderFooter}

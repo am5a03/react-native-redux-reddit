@@ -12,7 +12,8 @@ let {
   View,
   Text,
   BackAndroid,
-  ToolbarAndroid
+  ToolbarAndroid,
+  Platform
 } = React;
 
 class App extends React.Component {
@@ -34,8 +35,9 @@ class App extends React.Component {
         Actions.pop();
         return true;
     });
+    const shouldHideToolbar = Platform.OS === 'ios' ? false : true;
     return (
-      <Router hideNavBar={true}>
+      <Router hideNavBar={shouldHideToolbar}>
         <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottomAndroid}/>
         <Route name="home" component={MainContainer} initial={true} wrapRouter={false} title="Home" schema="modal" navBar={ToolbarAndroid}/>
         <Route name="postDetail" component={PostDetail} title="PostDetail" schema="modal"/>

@@ -7,6 +7,7 @@ let {
   StyleSheet,
   Platform,
   TouchableNativeFeedback,
+  TouchableOpacity,
   Image
 } = React;
 
@@ -20,7 +21,7 @@ class Post extends React.Component {
     let buttonProps = {};
 
     if (Platform.OS === 'ios') {
-
+      TouchableComponent = TouchableOpacity;
     } else {
       TouchableComponent = TouchableNativeFeedback;
       buttonProps = {
