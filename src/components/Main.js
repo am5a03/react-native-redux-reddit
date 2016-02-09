@@ -11,7 +11,8 @@ let {
   Image,
   ToolbarAndroid,
   Platform,
-  PropTypes
+  PropTypes,
+  Dimensions
 } = React;
 import {connect} from 'react-redux';
 
@@ -50,8 +51,9 @@ class Main extends React.Component {
 
   render() {
     if (Platform.OS === 'ios') {
+      const windowDims = Dimensions.get('window');
       return (
-        <View style={{ flex: 1 }}>
+        <View style={{ paddingTop: 65, height: windowDims.height}}>
           <PostList {...this.props}/>
         </View>
       )

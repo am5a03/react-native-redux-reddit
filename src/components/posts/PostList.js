@@ -108,10 +108,8 @@ class PostList extends React.Component {
     if (this.state.isFetching && this.state.count === 0) {
       return this.renderLoadingView();
     } else {
-      const windowDims = Dimensions.get('window');
       return(
         <ListView
-          style={{height: windowDims.height}}
           dataSource={this.state.dataSource}
           renderRow={this._renderPosts.bind(this)}
           renderFooter={this.renderFooter}
