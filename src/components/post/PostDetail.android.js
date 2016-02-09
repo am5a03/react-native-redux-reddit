@@ -1,5 +1,6 @@
 import React from 'react-native';
 import {Actions} from 'react-native-router-flux';
+import PostDetailBase from './PostDetailBase';
 let {
   View,
   Text,
@@ -10,7 +11,7 @@ let {
   SimpleCacheAndroid
 } = React;
 
-class PostDetail extends React.Component {
+class PostDetail extends PostDetailBase {
   constructor(props) {
     super(props);
     this.state = {
